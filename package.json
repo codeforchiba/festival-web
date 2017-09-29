@@ -1,0 +1,79 @@
+{
+  "name": "feschibal",
+  "version": "1.0.3",
+  "description": "祭りオープンデータプロジェクト",
+  "main": "index.html",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codeforchiba/feschibal"
+  },
+  "keywords": [
+    "chiba"
+  ],
+  "author": "codeforchiba",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codeforchiba/feschibal/issues"
+  },
+  "homepage": "https://github.com/codeforchiba/feschibal",
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "1.13.2",
+    "cookie-parser": "1.3.5",
+    "debug": "2.2.0",
+    "ejs": "2.3.3",
+    "express": "4.13.4",
+    "js-yaml": "3.4.6",
+    "morgan": "1.6.1",
+    "request": "2.67.0",
+    "serve-favicon": "2.3.0",
+    "config": "1.21.0"
+  },
+  "devDependencies": {
+    "apache-server-configs": "2.14.0",
+    "bluebird": "3.1.1",
+    "connect-livereload": "0.5.4",
+    "csv-parse": "1.0.1",
+    "csv-stringify": "0.0.8",
+    "grunt": "1.0.1",
+    "grunt-autoprefixer": "3.0.4",
+    "grunt-concurrent": "2.1.0",
+    "grunt-contrib-clean": "0.7.0",
+    "grunt-contrib-concat": "0.5.1",
+    "grunt-contrib-connect": "0.11.2",
+    "grunt-contrib-copy": "0.8.2",
+    "grunt-contrib-cssmin": "0.14.0",
+    "grunt-contrib-htmlmin": "0.6.0",
+    "grunt-contrib-imagemin": "1.0.0",
+    "grunt-contrib-jshint": "0.11.3",
+    "grunt-contrib-uglify": "0.11.0",
+    "grunt-contrib-watch": "1.0.0",
+    "grunt-convert": "0.1.12",
+    "grunt-express-server": "0.5.3",
+    "grunt-mocha": "1.0.2",
+    "grunt-modernizr": "1.0.2",
+    "grunt-newer": "1.2.0",
+    "grunt-replace": "0.11.0",
+    "grunt-rev": "0.1.0",
+    "grunt-riot": "0.1.4",
+    "grunt-sass": "1.2.0",
+    "grunt-svgmin": "3.1.1",
+    "grunt-usemin": "3.1.1",
+    "highland": "2.6.0",
+    "iconv-lite": "0.4.13",
+    "jshint-stylish": "2.1.0",
+    "load-grunt-tasks": "3.4.0",
+    "moment": "2.11.0",
+    "oboe": "2.1.2",
+    "promise-streams": "1.0.1",
+    "serve-static": "1.10.0",
+    "stream-transform": "0.1.1",
+    "time-grunt": "1.3.0",
+    "unique-stream": "2.2.0"
+  },
+  "engines": {
+    "node": ">=4.0.0"
+  }
+}
