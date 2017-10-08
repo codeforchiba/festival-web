@@ -499,6 +499,28 @@ module.exports = function (grunt) {
           background: false,
         }
       }
+    },
+
+    aws_s3: {
+      options: {
+        region: "ap-northeast-1",
+      },
+      staging: {
+        options: {
+          bucket: 'festival.staging.code4chiba.org',
+        },
+        files: [
+          {expand: true, cwd: 'dist/', src: '**', dest: ''},
+        ]
+      },
+      production: {
+        options: {
+          bucket: 'festival.code4chiba.org',
+        },
+        files: [
+          {expand: true, cwd: 'dist/', src: '**', dest: ''},
+        ]
+      }
     }
   });
 
@@ -552,4 +574,12 @@ module.exports = function (grunt) {
     'newer:jshint',
     'build'
   ]);
+
+  // grunt-aws-s3プラグイン読み込み
+  grunt.loadNpmTasks('grunt-aws-s3');
+
+  // upload s3 staging
+  grunt.registerTask('upload-s3-staging', ['aws_s3:staging']);
+  // upload s3 production
+  grunt.registerTask('upload-s3-production', ['aws_s3:production']);
 };
