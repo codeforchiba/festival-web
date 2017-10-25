@@ -575,9 +575,6 @@ module.exports = function (grunt) {
     'build'
   ]);
 
-  // grunt-aws-s3プラグイン読み込み
-  grunt.loadNpmTasks('grunt-aws-s3');
-
   // upload s3 staging
   grunt.registerTask('upload-s3-staging', ['aws_s3:staging']);
   // upload s3 production
