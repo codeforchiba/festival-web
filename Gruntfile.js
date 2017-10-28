@@ -503,11 +503,11 @@ module.exports = function (grunt) {
 
     aws_s3: {
       options: {
-        region: "ap-northeast-1",
+        region: process.env.AWS_REGION,
       },
       staging: {
         options: {
-          bucket: 'festival.staging.code4chiba.org',
+          bucket: process.env.AWS_BUCKET_STAGING,
         },
         files: [
           {expand: true, cwd: 'dist/', src: '**', dest: ''},
@@ -515,7 +515,7 @@ module.exports = function (grunt) {
       },
       production: {
         options: {
-          bucket: 'festival.code4chiba.org',
+          bucket: process.env.AWS_BUCKET_PRODUCTION,
         },
         files: [
           {expand: true, cwd: 'dist/', src: '**', dest: ''},

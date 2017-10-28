@@ -63,7 +63,11 @@ distディレクトリに本番用モジュールが生成されます。
 $ grunt build
 ```
 
-#### 3. デプロイ
+#### 3. 環境変数
+nodeの環境変数を、process.env.<環境変数>で取得しています。
+必要な環境変数を開発環境に設定してください。
+
+#### 4. デプロイ
 grunt-aws-s3プラグインにより、AWSへデプロイされます。
 AWS Access Key ID,AWS Secret Access Keyは、
 [AWS CLI のインストールと設定](http://docs.aws.amazon.com/ja_jp/streams/latest/dev/kinesis-tutorial-cli-installation.html)で設定したCredentialを参照します。
