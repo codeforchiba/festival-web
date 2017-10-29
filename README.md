@@ -57,10 +57,21 @@ $ cd feschibal
 $ npm install
 ```
 
-#### 2. 本番用モジュール生成
-distディレクトリに本番用モジュールが生成されます。
+#### 2. ビルド
+サーバに設置するためのファイルをdist配下に生成します。
+
+オプションを指定しないと`config/default.yml`を使ってbuildします。
+
+##### ステージング
+`config/staging.yml`を使ってbuildします。
 ```
-$ grunt build
+$ grunt build:staging
+```
+
+##### 本番
+`config/production.yml`を使ってbuildします。
+```
+$ grunt build:production
 ```
 
 #### 3. 環境変数
