@@ -71,14 +71,9 @@ nodeの環境変数を、process.env.<環境変数>で取得しています。
 grunt-aws-s3プラグインにより、AWSへデプロイされます。
 AWS Access Key ID,AWS Secret Access Keyは、
 [AWS CLI のインストールと設定](http://docs.aws.amazon.com/ja_jp/streams/latest/dev/kinesis-tutorial-cli-installation.html)で設定したCredentialを参照します。
-- ステージング環境へのデプロイ
+※注　ステージング,本番環境の切り替えには、環境変数の切り替えが必要です。
 ```
-$ grunt upload-s3-staging
-```
-
-- 本番環境へのデプロイ
-```
-$ grunt upload-s3-production
+$ grunt upload-s3
 ```
 
 ## ディレクトリ構造

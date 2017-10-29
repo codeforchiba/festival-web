@@ -505,17 +505,9 @@ module.exports = function (grunt) {
       options: {
         region: process.env.AWS_REGION,
       },
-      staging: {
+      festival: {
         options: {
-          bucket: process.env.AWS_BUCKET_STAGING,
-        },
-        files: [
-          {expand: true, cwd: 'dist/', src: '**', dest: ''},
-        ]
-      },
-      production: {
-        options: {
-          bucket: process.env.AWS_BUCKET_PRODUCTION,
+          bucket: process.env.AWS_BUCKET,
         },
         files: [
           {expand: true, cwd: 'dist/', src: '**', dest: ''},
@@ -575,8 +567,6 @@ module.exports = function (grunt) {
     'build'
   ]);
 
-  // upload s3 staging
-  grunt.registerTask('upload-s3-staging', ['aws_s3:staging']);
-  // upload s3 production
-  grunt.registerTask('upload-s3-production', ['aws_s3:production']);
+  // upload s3
+  grunt.registerTask('upload-s3', ['aws_s3:festival']);
 };
