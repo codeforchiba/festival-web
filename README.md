@@ -86,6 +86,13 @@ $ grunt build:production
 nodeの環境変数を、process.env.<環境変数>で取得しています。  
 必要な環境変数を開発環境に設定してください。
 
+dotenvで環境変数を設定する場合は
+```
+mv .env.sample .env
+```
+で `.env` を作成し、編集してください。
+
+
 #### 4. デプロイ
 
 grunt-aws-s3プラグインにより、AWSへデプロイされます。  
