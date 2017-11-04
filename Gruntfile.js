@@ -252,32 +252,6 @@ module.exports = function (grunt) {
       }
     },
 
-    // By default, your `index.html`'s <!-- Usemin block --> will take care
-    // of minification. These next options are pre-configured if you do not
-    // wish to use the Usemin blocks.
-    // cssmin: {
-    //   dist: {
-    //     files: {
-    //       '<%= config.dist %>/styles/main.css': [
-    //         '.tmp/styles/{,*/}*.css',
-    //         '<%= config.app %>/styles/{,*/}*.css'
-    //       ]
-    //     }
-    //   }
-    // },
-    // uglify: {
-    //   dist: {
-    //     files: {
-    //       '<%= config.dist %>/scripts/scripts.js': [
-    //         '<%= config.dist %>/scripts/scripts.js'
-    //       ]
-    //     }
-    //   }
-    // },
-    // concat: {
-    //   dist: {}
-    // },
-
     // Copies remaining files to places other tasks can use
     copy: {
       dist: {
@@ -295,10 +269,6 @@ module.exports = function (grunt) {
               'data/{,*/}*.*'
             ]
           }
-          // }, {
-          //   src: 'node_modules/apache-server-configs/dist/.htaccess',
-          //   dest: '<%= config.dist %>/.htaccess'
-          // }
         ]
       },
       styles: {
@@ -499,6 +469,20 @@ module.exports = function (grunt) {
           background: false,
         }
       }
+    },
+
+    aws_s3: {
+      options: {
+        region: process.env.AWS_REGION,
+      },
+      festival: {
+        options: {
+          bucket: process.env.AWS_BUCKET,
+        },
+        files: [
+          {expand: true, cwd: 'dist/', src: '**', dest: ''},
+        ]
+      }
     }
   });
 
@@ -561,4 +545,7 @@ module.exports = function (grunt) {
     'newer:jshint',
     'build'
   ]);
+
+  // upload s3
+  grunt.registerTask('upload-s3', ['aws_s3:festival']);
 };

@@ -1,6 +1,6 @@
 # festival-web
 
-[Code for Chiba](http://code4chiba.org) のお祭りデータセンターのソースコードです。
+[Code for Chiba](http://code4chiba.org) のお祭りデータセンターの Web フロントエンドです。
 
 ## 使用ライブラリ
 
@@ -22,9 +22,11 @@ Gruntが担うタスクは以下の機能になります。
 - リリース用モジュール（ソース圧縮、結合等）の生成
 
 ## ローカル環境で開発する
-## node.jsを用いた開発環境
+
 ローカル環境にnode.jsをインストールして開発環境を作ります。
+
 ### 開発ツールのインストール
+
 - [node](https://nodejs.org/en/)のインストール
 
 **（nodeが既にインストールされている場合はスキップ可）**
@@ -36,6 +38,7 @@ Gruntが担うタスクは以下の機能になります。
 **（デプロイ時に必要な設定）**
 
 ### 開発環境準備
+
 - npmとgruntをアップデートする。
 
 ```
@@ -52,33 +55,39 @@ $ cd feschibal
 
 ### 開発環境で実行する
 #### 1. 必要なモジュールのセットアップ
+
 プロジェクトのディレクトリ直下で実行してください。
 ```
 $ npm install
 ```
 
 #### 2. ビルド
+
 サーバに設置するためのファイルをdist配下に生成します。
 
 オプションを指定しないと`config/default.yml`を使ってbuildします。
 
 ##### ステージング
+
 `config/staging.yml`を使ってbuildします。
 ```
 $ grunt build:staging
 ```
 
 ##### 本番
+
 `config/production.yml`を使ってbuildします。
 ```
 $ grunt build:production
 ```
 
 #### 3. 環境変数
+
 nodeの環境変数を、process.env.<環境変数>で取得しています。  
 必要な環境変数を開発環境に設定してください。
 
 #### 4. デプロイ
+
 grunt-aws-s3プラグインにより、AWSへデプロイされます。  
 AWS Access Key ID,AWS Secret Access Keyは、  
 [AWS CLI のインストールと設定](http://docs.aws.amazon.com/ja_jp/streams/latest/dev/kinesis-tutorial-cli-installation.html)で設定したCredentialを参照します。
