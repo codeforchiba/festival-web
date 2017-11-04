@@ -20,10 +20,11 @@ module.exports = function (grunt) {
     data: 'data'
   };
 
-  // load env file
+  // load datasource_config file
   var yaml = require("js-yaml");
   var fs = require("fs");
-  var env = yaml.load(fs.readFileSync("config/default.yml"));
+  var datasource_config = yaml.load(fs.readFileSync("config/default.yml"));
+
   // load .env file
   require('dotenv').config();
 
@@ -409,7 +410,7 @@ module.exports = function (grunt) {
         options: {
           patterns: [
             {
-              json: env
+              json: datasource_config
             }
           ]
         },
@@ -433,7 +434,7 @@ module.exports = function (grunt) {
         options: {
           patterns: [
             {
-              json: env
+              json: datasource_config
             }
           ]
         },
@@ -517,7 +518,7 @@ module.exports = function (grunt) {
     var fileName = 'config/default.yml';
     if (option === 'production' || option === 'staging') {
       fileName = 'config/' + option + '.yml';
-      env = yaml.load(fs.readFileSync(fileName));
+      datasource_config = yaml.load(fs.readFileSync(fileName));
     }
     grunt.log.writeln(fileName + 'でbuildします。');
 
