@@ -24,6 +24,8 @@ module.exports = function (grunt) {
   var yaml = require("js-yaml");
   var fs = require("fs");
   var env = yaml.load(fs.readFileSync("config/default.yml"));
+  // load .env file
+  require('dotenv').config();
 
   // Define the configuration for all the tasks
   grunt.initConfig({
