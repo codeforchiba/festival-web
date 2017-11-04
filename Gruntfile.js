@@ -499,6 +499,20 @@ module.exports = function (grunt) {
           background: false,
         }
       }
+    },
+
+    aws_s3: {
+      options: {
+        region: process.env.AWS_REGION,
+      },
+      festival: {
+        options: {
+          bucket: process.env.AWS_BUCKET,
+        },
+        files: [
+          {expand: true, cwd: 'dist/', src: '**', dest: ''},
+        ]
+      }
     }
   });
 
@@ -552,4 +566,7 @@ module.exports = function (grunt) {
     'newer:jshint',
     'build'
   ]);
+
+  // upload s3
+  grunt.registerTask('upload-s3', ['aws_s3:festival']);
 };
