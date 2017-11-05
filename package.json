@@ -1,21 +1,21 @@
 {
-  "name": "feschibal",
-  "version": "1.0.3",
-  "description": "祭りオープンデータプロジェクト",
+  "name": "festival-web",
+  "version": "1.0.0",
+  "description": "お祭りデータセンター Web UI",
   "main": "index.html",
   "repository": {
     "type": "git",
-    "url": "https://github.com/codeforchiba/feschibal"
+    "url": "https://github.com/codeforchiba/festival-web"
   },
   "keywords": [
     "chiba"
   ],
   "author": "codeforchiba",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/codeforchiba/feschibal/issues"
+    "url": "https://github.com/codeforchiba/festival-web/issues"
   },
-  "homepage": "https://github.com/codeforchiba/feschibal",
+  "homepage": "https://github.com/codeforchiba/festival-web",
   "scripts": {
     "start": "node ./bin/www"
   },
@@ -33,10 +33,7 @@
   },
   "devDependencies": {
     "apache-server-configs": "2.14.0",
-    "bluebird": "3.1.1",
     "connect-livereload": "0.5.4",
-    "csv-parse": "1.0.1",
-    "csv-stringify": "0.0.8",
     "grunt": "1.0.1",
     "grunt-autoprefixer": "3.0.4",
     "grunt-aws-s3": "2.0.0",
@@ -62,17 +59,12 @@
     "grunt-sass": "1.2.0",
     "grunt-svgmin": "3.1.1",
     "grunt-usemin": "3.1.1",
-    "highland": "2.6.0",
     "iconv-lite": "0.4.13",
     "jshint-stylish": "2.1.0",
     "load-grunt-tasks": "3.4.0",
     "moment": "2.11.0",
-    "oboe": "2.1.2",
-    "promise-streams": "1.0.1",
     "serve-static": "1.10.0",
-    "stream-transform": "0.1.1",
-    "time-grunt": "1.3.0",
-    "unique-stream": "2.2.0"
+    "time-grunt": "1.3.0"
   },
   "engines": {
     "node": ">=4.0.0"
