@@ -252,32 +252,6 @@ module.exports = function (grunt) {
       }
     },
 
-    // By default, your `index.html`'s <!-- Usemin block --> will take care
-    // of minification. These next options are pre-configured if you do not
-    // wish to use the Usemin blocks.
-    // cssmin: {
-    //   dist: {
-    //     files: {
-    //       '<%= config.dist %>/styles/main.css': [
-    //         '.tmp/styles/{,*/}*.css',
-    //         '<%= config.app %>/styles/{,*/}*.css'
-    //       ]
-    //     }
-    //   }
-    // },
-    // uglify: {
-    //   dist: {
-    //     files: {
-    //       '<%= config.dist %>/scripts/scripts.js': [
-    //         '<%= config.dist %>/scripts/scripts.js'
-    //       ]
-    //     }
-    //   }
-    // },
-    // concat: {
-    //   dist: {}
-    // },
-
     // Copies remaining files to places other tasks can use
     copy: {
       dist: {
@@ -295,10 +269,6 @@ module.exports = function (grunt) {
               'data/{,*/}*.*'
             ]
           }
-          // }, {
-          //   src: 'node_modules/apache-server-configs/dist/.htaccess',
-          //   dest: '<%= config.dist %>/.htaccess'
-          // }
         ]
       },
       styles: {
@@ -541,20 +511,29 @@ module.exports = function (grunt) {
     grunt.task.run(tasks);
   });
 
-  grunt.registerTask('build', [
-    'clean:dist',
-    'useminPrepare',
-    'concurrent:dist',
-    'replace:prod',
-    'autoprefixer',
-    'concat',
-    'cssmin',
-    'uglify',
-    'copy:dist',
-    'rev',
-    'usemin',
-    'htmlmin'
-  ]);
+  grunt.registerTask('build', 'サーバに設置するためのファイルをdist配下に生成します。', function (option) {
+    var fileName = 'config/default.yml';
+    if (option === 'production' || option === 'staging') {
+      fileName = 'config/' + option + '.yml';
+      env = yaml.load(fs.readFileSync(fileName));
+    }
+    grunt.log.writeln(fileName + 'でbuildします。');
+
+    grunt.task.run([
+      'clean:dist',
+      'useminPrepare',
+      'concurrent:dist',
+      'replace:prod',
+      'autoprefixer',
+      'concat',
+      'cssmin',
+      'uglify',
+      'copy:dist',
+      'rev',
+      'usemin',
+      'htmlmin'
+    ]);
+  });
 
   grunt.registerTask('build-data', [
     'manipulate-csv',
