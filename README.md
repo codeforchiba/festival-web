@@ -1,6 +1,6 @@
 # festival-web
 
-[Code for Chiba](http://code4chiba.org) のお祭りデータセンターの Web フロントエンドです。
+[Code for Chiba](http://www.code4chiba.org) のお祭りデータセンターの Web フロントエンドです。
 
 ## 使用ライブラリ
 
@@ -23,19 +23,16 @@ Gruntが担うタスクは以下の機能になります。
 
 ## ローカル環境で開発する
 
-ローカル環境にnode.jsをインストールして開発環境を作ります。
+ローカル環境にNode.jsをインストールして開発環境を作ります。
 
 ### 開発ツールのインストール
 
-- [node](https://nodejs.org/en/)のインストール
+* [Node.js](https://nodejs.org/en/)
 
-**（nodeが既にインストールされている場合はスキップ可）**
+**（Node.jsが既にインストールされている場合はスキップ可）**
 
 ※注　macの場合nodeが/usr/local下にインストールされると権限の問題でnpmコマンドが失敗します。
 インストール先を変更するか、権限を与えるようにしてください。
-
-- [AWS CLI のインストールと設定](http://docs.aws.amazon.com/ja_jp/streams/latest/dev/kinesis-tutorial-cli-installation.html)
-**（デプロイ時に必要な設定）**
 
 ### 開発環境準備
 
@@ -49,50 +46,57 @@ $ npm install -g grunt-cli
 - ソースをチェックアウトし、プロジェクトのディレクトリに移動します。
 
 ```
-$ git clone https://github.com/codeforchiba/feschibal.git
-$ cd feschibal
+$ git clone https://github.com/codeforchiba/festival-web.git
+$ cd festival-web
 ```
 
 ### 開発環境で実行する
-#### 1. 必要なモジュールのセットアップ
+#### 必要なモジュールのセットアップ
 
 プロジェクトのディレクトリ直下で実行してください。
 ```
 $ npm install
 ```
 
-#### 2. ビルド
+その後、Gruntタスクを実行すると、開発環境で実行することができます。
 
-サーバに設置するためのファイルをdist配下に生成します。
+```
+$ grunt serve
+```
 
-オプションを指定しないと`config/default.yml`を使ってbuildします。
+### ビルドする
 
-##### ステージング
+サーバに設置するためのファイルを `dist` 配下に生成します。
+
+`target` オプションを指定しないと`config/default.yml`を使ってビルドします。
+
+#### ステージング環境向け
 
 `config/staging.yml`を使ってbuildします。
+
 ```
-$ grunt build:staging
+$ grunt build --target stagong
 ```
 
-##### 本番
+#### 本番環境向け
 
 `config/production.yml`を使ってbuildします。
+
 ```
-$ grunt build:production
+$ grunt build --target production
 ```
 
-#### 3. 環境変数
+### デプロイ
 
-nodeの環境変数を、process.env.<環境変数>で取得しています。  
-必要な環境変数を開発環境に設定してください。
+AWS S3へのデプロイを想定した作りとなっています。必要な環境変数を設定して、実行します。
 
-#### 4. デプロイ
+* AWS_ACCESS_KEY_ID
+* AWS_SECRET_ACCESS_KEY
+* AWS_BUCKET
+* AWS_REGION(Optional)
 
-grunt-aws-s3プラグインにより、AWSへデプロイされます。  
-AWS Access Key ID,AWS Secret Access Keyは、  
-[AWS CLI のインストールと設定](http://docs.aws.amazon.com/ja_jp/streams/latest/dev/kinesis-tutorial-cli-installation.html)で設定したCredentialを参照します。
 ```
-$ grunt upload-s3
+$ grunt deploy
 ```
 
 ## ディレクトリ構造

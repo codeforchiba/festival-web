@@ -10,9 +10,6 @@ module.exports = function (grunt) {
   // Load grunt tasks automatically
   require('load-grunt-tasks')(grunt);
 
-  //
-  grunt.loadTasks('tasks');
-
   // Configurable paths
   var config = {
     app: 'app',
@@ -20,14 +17,18 @@ module.exports = function (grunt) {
     data: 'data'
   };
 
-  // load env file
-  var yaml = require("js-yaml");
-  var fs = require("fs");
-  var env = yaml.load(fs.readFileSync("config/default.yml"));
+  // aws configuration
+  var awsConfig = {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    region: process.env.AWS_REGION || 'ap-northeast-1',
+    s3Bucket: process.env.AWS_BUCKET
+  };
+
+  var targetEnv = grunt.option('target') || 'default';
 
   // Define the configuration for all the tasks
   grunt.initConfig({
-
     // Project settings
     config: config,
 
@@ -35,7 +36,7 @@ module.exports = function (grunt) {
     watch: {
       js: {
         files: ['<%= config.app %>/scripts/**/*.js'],
-        tasks: ['replace:dev', 'jshint'],
+        tasks: ['replace', 'jshint'],
         options: {
           livereload: true
         }
@@ -309,14 +310,7 @@ module.exports = function (grunt) {
     },
 
     replace: {
-      dev: {
-        options: {
-          patterns: [
-            {
-              json: env
-            }
-          ]
-        },
+      dist: {
         files: [
           {
             expand: true,
@@ -333,30 +327,6 @@ module.exports = function (grunt) {
           }
         ]
       },
-      prod: {
-        options: {
-          patterns: [
-            {
-              json: env
-            }
-          ]
-        },
-        files: [
-          {
-            expand: true,
-            flatten: false,
-            src: ['.tmp/scripts/**/*.js'],
-            dest: '.'
-          },
-          {
-            expand: true,
-            flatten: false,
-            cwd: '<%= config.app %>/scripts',
-            src: ['**/*.js', '!vendor/**/*.*'],
-            dest: '.tmp/scripts'
-          }
-        ]
-      }
     },
 
     express: {
@@ -379,16 +349,33 @@ module.exports = function (grunt) {
 
     aws_s3: {
       options: {
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-        region: process.env.AWS_REGION,
+        accessKeyId: awsConfig.accessKeyId,
+        secretAccessKey: awsConfig.secretAccessKey,
+        region: awsConfig.region,
       },
       festival: {
         options: {
-          bucket: process.env.AWS_BUCKET,
+          bucket: awsConfig.s3Bucket,
         },
         files: [
           {expand: true, cwd: 'dist/', src: '**', dest: ''},
+        ]
+      }
+    }
+  });
+
+  // load environment-specific configuration
+  var yaml = require("js-yaml");
+  var fs = require("fs");
+  var replaceConfig = yaml.load(fs.readFileSync('config/' + targetEnv + '.yml'));
+
+  grunt.config.merge({
+    replace: {
+      options: {
+        patterns: [
+          {
+            json: replaceConfig
+          }
         ]
       }
     }
@@ -405,7 +392,7 @@ module.exports = function (grunt) {
     var tasks = [
       'clean:server',
       'concurrent:server',
-      'replace:dev',
+      'replace',
       'autoprefixer'
     ];
 
@@ -419,35 +406,27 @@ module.exports = function (grunt) {
     grunt.task.run(tasks);
   });
 
-  grunt.registerTask('build', 'サーバに設置するためのファイルをdist配下に生成します。', function (option) {
-    var fileName = 'config/default.yml';
-    if (option === 'production' || option === 'staging') {
-      fileName = 'config/' + option + '.yml';
-      env = yaml.load(fs.readFileSync(fileName));
-    }
-    grunt.log.writeln(fileName + 'でbuildします。');
-
-    grunt.task.run([
-      'clean:dist',
-      'useminPrepare',
-      'concurrent:dist',
-      'replace:prod',
-      'autoprefixer',
-      'concat',
-      'cssmin',
-      'uglify',
-      'copy:dist',
-      'rev',
-      'usemin',
-      'htmlmin'
-    ]);
-  });
+  grunt.registerTask('build', 'サーバに設置するためのファイルをdist配下に生成します。', [
+    'clean:dist',
+    'useminPrepare',
+    'concurrent:dist',
+    'replace',
+    'autoprefixer',
+    'concat',
+    'cssmin',
+    'uglify',
+    'copy:dist',
+    'rev',
+    'usemin',
+    'htmlmin'
+  ]);
 
   grunt.registerTask('default', [
     'newer:jshint',
     'build'
   ]);
 
-  // upload s3
-  grunt.registerTask('upload-s3', ['aws_s3:festival']);
+  grunt.registerTask('deploy', [
+    'aws_s3:festival'
+  ]);
 };
