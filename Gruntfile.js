@@ -23,7 +23,9 @@ module.exports = function (grunt) {
   // load env file
   var yaml = require("js-yaml");
   var fs = require("fs");
-  var env = yaml.load(fs.readFileSync("config/default.yml"));
+  var develop_config = yaml.load(fs.readFileSync("config/develop.yml"));
+  var production_config = yaml.load(fs.readFileSync("config/production.yml"));
+  var staging_config = yaml.load(fs.readFileSync("config/staging.yml"));
 
   // Define the configuration for all the tasks
   grunt.initConfig({
@@ -407,7 +409,7 @@ module.exports = function (grunt) {
         options: {
           patterns: [
             {
-              json: env
+              json: develop_config
             }
           ]
         },
@@ -431,7 +433,7 @@ module.exports = function (grunt) {
         options: {
           patterns: [
             {
-              json: env
+              json: production_config
             }
           ]
         },
@@ -450,7 +452,31 @@ module.exports = function (grunt) {
             dest: '.tmp/scripts'
           }
         ]
-      }
+      },
+      staging: {
+            options: {
+                patterns: [
+                    {
+                        json: staging_config
+                    }
+                ]
+            },
+            files: [
+                {
+                    expand: true,
+                    flatten: false,
+                    src: ['.tmp/scripts/**/*.js'],
+                    dest: '.'
+                },
+                {
+                    expand: true,
+                    flatten: false,
+                    cwd: '<%= config.app %>/scripts',
+                    src: ['**/*.js', '!vendor/**/*.*'],
+                    dest: '.tmp/scripts'
+                }
+            ]
+        }
     },
 
     express: {
@@ -512,18 +538,23 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('build', 'サーバに設置するためのファイルをdist配下に生成します。', function (option) {
-    var fileName = 'config/default.yml';
-    if (option === 'production' || option === 'staging') {
-      fileName = 'config/' + option + '.yml';
-      env = yaml.load(fs.readFileSync(fileName));
+    var replace_task = 'replace:dev';
+    var build_mode = 'develop';
+    if (option === 'production'){
+        replace_task = 'replace:prod';
+        build_mode = option;
+    }else if(option === 'staging'){
+        replace_task = 'replace:staging';
+        build_mode = option;
     }
-    grunt.log.writeln(fileName + 'でbuildします。');
+
+    grunt.log.writeln(build_mode + 'でbuildします。');
 
     grunt.task.run([
       'clean:dist',
       'useminPrepare',
       'concurrent:dist',
-      'replace:prod',
+      replace_task,
       'autoprefixer',
       'concat',
       'cssmin',
