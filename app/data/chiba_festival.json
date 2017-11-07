@@ -9614,5 +9614,43 @@
         "end": "2017-08-27T11:30:00.000Z"
       }
     ]
+  },
+  {
+    "id": "334",
+    "name": "長沼原収穫祭",
+    "location": {
+      "name": "長沼原勤労市民プラザ",
+      "state": "千葉県",
+      "stateCode": "12",
+      "city": "千葉市",
+      "cityCode": "1212",
+      "address": "稲毛区長沼原町304-1",
+      "addressCode": "121030024",
+      "lat": "35.668396",
+      "long": "140.129942"
+    },
+    "features": {
+      "dancing": false,
+      "singing": false,
+      "drum": false,
+      "musicalPerformance": true,
+      "foodTruck": true,
+      "fireworks": false,
+      "mikoshi": false,
+      "others": [
+        "千葉市市内農家による野菜直売、キッチンカー"
+      ],
+      "specialProgram": [
+        "千葉市土気地区300年の伝承からし菜オリエンタルマスタードづくり体験"
+      ]
+    },
+    "organizer": "長沼原勤労市民プラザ",
+    "periods": [
+      {
+        "start": "2017-11-11T00:00:00.000Z",
+        "end": "2017-11-11T05:30:00.000Z"
+      }
+    ],
+    "url": "https://www.facebook.com/events/1588833481174041/"
   }
 ]
