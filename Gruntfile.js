@@ -10,9 +10,6 @@ module.exports = function (grunt) {
   // Load grunt tasks automatically
   require('load-grunt-tasks')(grunt);
 
-  //
-  grunt.loadTasks('tasks');
-
   // Configurable paths
   var config = {
     app: 'app',
@@ -20,14 +17,18 @@ module.exports = function (grunt) {
     data: 'data'
   };
 
-  // load env file
-  var yaml = require("js-yaml");
-  var fs = require("fs");
-  var env = yaml.load(fs.readFileSync("config/default.yml"));
+  // aws configuration
+  var awsConfig = {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    region: process.env.AWS_REGION || 'ap-northeast-1',
+    s3Bucket: process.env.AWS_BUCKET
+  };
+
+  var targetEnv = grunt.option('target') || 'default';
 
   // Define the configuration for all the tasks
   grunt.initConfig({
-
     // Project settings
     config: config,
 
@@ -35,7 +36,7 @@ module.exports = function (grunt) {
     watch: {
       js: {
         files: ['<%= config.app %>/scripts/**/*.js'],
-        tasks: ['replace:dev', 'jshint'],
+        tasks: ['replace', 'jshint'],
         options: {
           livereload: true
         }
@@ -308,109 +309,8 @@ module.exports = function (grunt) {
       }
     },
 
-    'manipulate-csv': {
-      options: {
-        '12chiba': {
-          encoding: 'shift_jis',
-          filter: {
-            5: "0",
-            6: "0",
-            9: "千葉市"
-          },
-          unique: true,
-          removeColumn: [ 0, 4, 5, 6, 8, 10, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
-          from: ['都道府県CD', '市区町村CD', '町域CD', '都道府県', '市区町村', '町域'],
-          to: ['stateCode', 'cityCode', 'addressCode', 'state', 'city', 'address']
-        },
-        kouen_1: {
-          encoding: 'shift_jis',
-          filter: {
-            0: "稲毛"
-          },
-          unique: true,
-          removeColumn: [ 2, 3, 4, 9, 10, 14, 15, 16, 17, 18, 19, 20, 21, 22, 24, 25, 26, 27, 28, 29],
-          from: [
-            '施設、場所、イベントの名称', '施設、場所、イベントの名称（読み）', '経度（世界測地系）', '緯度（世界測地系）',
-            '郵便番号', '住所', '電話番号', 'FAX番号', 'アクセス', 'ホームページURL（PC）'
-          ],
-          to: [
-            'name', 'kanaName', 'longitude', 'latitude',
-            'postalCode', 'address', 'phone', 'fax', 'directions', 'url'
-          ]
-        },
-        chiba_festival: {
-          encoding: 'shift_jis',
-          removeColumn: [ 1, 3, 32, 38, 47, 50, 51, 52, 53, 58, 59],
-          from: [
-            'No', '祭りの名称', '開催日1', '開始時間1', '終了時間1', '開催日2', '開始時間2', '終了時間2',
-            '開催日3', '開始時間3', '終了時間3', '開催日4', '開始時間4', '終了時間4',
-            '開催日5', '開始時間5', '終了時間5', '開催日6', '開始時間6', '終了時間6',
-            '開催日7', '開始時間7', '終了時間7', '開催日8', '開始時間8', '終了時間8',
-            '開催日9', '開始時間9', '終了時間9', '備考', '会場名称',
-            '会場住所', '会場住所コード', '会場緯度', '会場経度',
-            '<踊り>', '<歌唱>', '<太鼓>', '<演奏>', '<出店・屋台>', '<花火>', '<神輿>', '<その他>',
-            '目玉イベント1', '目玉イベント2', '主催団体1', '主催団体2', '主催団体3'
-          ],
-          to: [
-            'id', 'name', 'date1', 'startTime1', 'endTime1', 'date2', 'startTime2', 'endTime2',
-            'date3', 'startTime3', 'endTime3', 'date4', 'startTime4', 'endTime4',
-            'date5', 'startTime5', 'endTime5', 'date6', 'startTime6', 'endTime6',
-            'date7', 'startTime7', 'endTime7', 'date8', 'startTime8', 'endTime8',
-            'date9', 'startTime9', 'endTime9', 'remarks', 'location_name',
-            'location_address', 'location_code', 'location_lat', 'location_long',
-            'features_dancing', 'features_singing', 'features_drum', 'features_musicalPerformance',
-            'features_foodTruck', 'features_fireworks', 'features_mikoshi', 'features_others',
-            'specialProgram1', 'specialProgram2', 'organizer', 'sponsor1', 'sponsor2'
-          ]
-        }
-      },
-      files: {
-        expand: true,
-        cwd: '<%= config.data %>/csv/original/',
-        src: '*.csv',
-        filter: 'isFile',
-        dest: '<%= config.data %>/csv/processed',
-        ext: '.csv'
-      }
-    },
-
-    'map-json': {
-      options: {
-        chiba_festival: true
-      },
-      files: {
-        expand: true,
-        cwd: '<%= config.data %>/json/generated/',
-        src: '*.json',
-        filter: 'isFile',
-        dest: '<%= config.data %>/json/mapped',
-        ext: '.json'
-      }
-    },
-
-    convert: {
-      options: {
-        explicitArray: false,
-      },
-      csv2json: {
-        expand: true,
-        cwd: '<%= config.data %>/csv/processed/',
-        src: '*.csv',
-        filter: 'isFile',
-        dest: '<%= config.data %>/json/generated/',
-        ext: '.json'
-      }
-    },
-
     replace: {
-      dev: {
-        options: {
-          patterns: [
-            {
-              json: env
-            }
-          ]
-        },
+      dist: {
         files: [
           {
             expand: true,
@@ -427,30 +327,6 @@ module.exports = function (grunt) {
           }
         ]
       },
-      prod: {
-        options: {
-          patterns: [
-            {
-              json: env
-            }
-          ]
-        },
-        files: [
-          {
-            expand: true,
-            flatten: false,
-            src: ['.tmp/scripts/**/*.js'],
-            dest: '.'
-          },
-          {
-            expand: true,
-            flatten: false,
-            cwd: '<%= config.app %>/scripts',
-            src: ['**/*.js', '!vendor/**/*.*'],
-            dest: '.tmp/scripts'
-          }
-        ]
-      }
     },
 
     express: {
@@ -473,14 +349,33 @@ module.exports = function (grunt) {
 
     aws_s3: {
       options: {
-        region: process.env.AWS_REGION,
+        accessKeyId: awsConfig.accessKeyId,
+        secretAccessKey: awsConfig.secretAccessKey,
+        region: awsConfig.region,
       },
       festival: {
         options: {
-          bucket: process.env.AWS_BUCKET,
+          bucket: awsConfig.s3Bucket,
         },
         files: [
           {expand: true, cwd: 'dist/', src: '**', dest: ''},
+        ]
+      }
+    }
+  });
+
+  // load environment-specific configuration
+  var yaml = require("js-yaml");
+  var fs = require("fs");
+  var replaceConfig = yaml.load(fs.readFileSync('config/' + targetEnv + '.yml'));
+
+  grunt.config.merge({
+    replace: {
+      options: {
+        patterns: [
+          {
+            json: replaceConfig
+          }
         ]
       }
     }
@@ -497,7 +392,7 @@ module.exports = function (grunt) {
     var tasks = [
       'clean:server',
       'concurrent:server',
-      'replace:dev',
+      'replace',
       'autoprefixer'
     ];
 
@@ -511,34 +406,19 @@ module.exports = function (grunt) {
     grunt.task.run(tasks);
   });
 
-  grunt.registerTask('build', 'サーバに設置するためのファイルをdist配下に生成します。', function (option) {
-    var fileName = 'config/default.yml';
-    if (option === 'production' || option === 'staging') {
-      fileName = 'config/' + option + '.yml';
-      env = yaml.load(fs.readFileSync(fileName));
-    }
-    grunt.log.writeln(fileName + 'でbuildします。');
-
-    grunt.task.run([
-      'clean:dist',
-      'useminPrepare',
-      'concurrent:dist',
-      'replace:prod',
-      'autoprefixer',
-      'concat',
-      'cssmin',
-      'uglify',
-      'copy:dist',
-      'rev',
-      'usemin',
-      'htmlmin'
-    ]);
-  });
-
-  grunt.registerTask('build-data', [
-    'manipulate-csv',
-    'convert',
-    'map-json'
+  grunt.registerTask('build', 'サーバに設置するためのファイルをdist配下に生成します。', [
+    'clean:dist',
+    'useminPrepare',
+    'concurrent:dist',
+    'replace',
+    'autoprefixer',
+    'concat',
+    'cssmin',
+    'uglify',
+    'copy:dist',
+    'rev',
+    'usemin',
+    'htmlmin'
   ]);
 
   grunt.registerTask('default', [
@@ -546,6 +426,7 @@ module.exports = function (grunt) {
     'build'
   ]);
 
-  // upload s3
-  grunt.registerTask('upload-s3', ['aws_s3:festival']);
+  grunt.registerTask('deploy', [
+    'aws_s3:festival'
+  ]);
 };
