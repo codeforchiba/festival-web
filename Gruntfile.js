@@ -329,24 +329,6 @@ module.exports = function (grunt) {
       },
     },
 
-    express: {
-      options: {
-        script: 'bin/www'
-      },
-      dev: {
-        options: {
-          background: true,
-          delay: 1,
-          port: 9000
-        }
-      },
-      prod: {
-        options: {
-          background: false,
-        }
-      }
-    },
-
     aws_s3: {
       options: {
         accessKeyId: awsConfig.accessKeyId,
@@ -393,16 +375,10 @@ module.exports = function (grunt) {
       'clean:server',
       'concurrent:server',
       'replace',
-      'autoprefixer'
+      'autoprefixer',
+      'connect:livereload',
+      'watch'
     ];
-
-    if (target === 'express') {
-      tasks.push("express:dev");
-    } else {
-      tasks.push("connect:livereload");
-    }
-
-    tasks.push("watch");
     grunt.task.run(tasks);
   });
 

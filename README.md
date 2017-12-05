@@ -75,7 +75,7 @@ $ grunt serve
 `config/staging.yml`を使ってbuildします。
 
 ```
-$ grunt build --target stagong
+$ grunt build --target=staging
 ```
 
 #### 本番環境向け
@@ -83,7 +83,7 @@ $ grunt build --target stagong
 `config/production.yml`を使ってbuildします。
 
 ```
-$ grunt build --target production
+$ grunt build --target=production
 ```
 
 ### デプロイ
