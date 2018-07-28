@@ -9652,5 +9652,293 @@
       }
     ],
     "url": "https://www.facebook.com/events/1588833481174041/"
+  },
+  {
+    "id": "664",
+    "name": "第40回磯辺夏祭り",
+    "location": {
+      "name": "中磯辺公園",
+      "state": "千葉県",
+      "stateCode": "12",
+      "city": "千葉市",
+      "cityCode": "1212",
+      "address": "美浜区磯辺4-27",
+      "addressCode": "121060001",
+      "lat": "35.630115",
+      "long": "140.056704"
+    },
+    "features": {
+      "dancing": true,
+      "singing": false,
+      "drum": true,
+      "musicalPerformance": true,
+      "foodTruck": true,
+      "fireworks": false,
+      "mikoshi": false,
+      "others": [
+        "丸太作りの櫓を囲み音羽太鼓に合わせ磯辺音頭を踊る"
+      ],
+      "specialProgram": [
+        "昼は子供神輿、夜は７自治会が提供する夜 店、全て７自治会の手作りです"
+      ]
+    },
+    "organizer": "磯辺夏祭り実行委員会",
+    "periods": [
+      {
+        "start": "2018-08-24T15:00:00.000Z",
+        "end": "2018-08-25T15:00:00.000Z"
+      },
+      {
+        "start": "2018-08-25T15:00:00.000Z",
+        "end": "2018-08-26T15:00:00.000Z"
+      }
+    ]
+  },
+  {
+    "id": "451",
+    "name": "千葉ふるさと夏まつり",
+    "location": {
+      "name": "高品公園",
+      "state": "千葉県",
+      "stateCode": "12",
+      "city": "千葉市",
+      "cityCode": "1212",
+      "address": "若葉区高品町1596",
+      "addressCode": "121040030",
+      "lat": "35.619474",
+      "long": "140.133835"
+    },
+    "features": {
+      "dancing": true,
+      "singing": false,
+      "drum": true,
+      "musicalPerformance": false,
+      "foodTruck": true,
+      "fireworks": false,
+      "mikoshi": false,
+      "specialProgram": [
+        "みつわ太鼓による太鼓ショー、盆踊り",
+        "沖縄伝統奉行エイサー"
+      ]
+    },
+    "organizer": "高品ハウジング",
+    "periods": [
+      {
+        "start": "2018-07-29T07:00:00.000Z",
+        "end": "2018-07-29T12:30:00.000Z"
+      }
+    ]
+  },
+  {
+    "id": "1021",
+    "name": "検見川神社例祭神幸祭",
+    "location": {
+      "name": "検見川神社",
+      "state": "千葉県",
+      "stateCode": "12",
+      "city": "千葉市",
+      "cityCode": "1212",
+      "address": "花見川区検見川町1-1",
+      "addressCode": "121020008",
+      "lat": "35.653524",
+      "long": "140.065977"
+    },
+    "features": {
+      "dancing": false,
+      "singing": false,
+      "drum": false,
+      "musicalPerformance": false,
+      "foodTruck": false,
+      "fireworks": false,
+      "mikoshi": true
+    },
+    "organizer": "検見川神社",
+    "periods": [
+      {
+        "start": "2018-07-31T15:00:00.000Z",
+        "end": "2018-08-01T15:00:00.000Z"
+      },
+      {
+        "start": "2018-08-01T15:00:00.000Z",
+        "end": "2018-08-02T15:00:00.000Z"
+      },
+      {
+        "start": "2018-08-02T15:00:00.000Z",
+        "end": "2018-08-03T15:00:00.000Z"
+      }
+    ],
+    "url": "http://www.kemigawa-jinja.com/gyouji/"
+  },
+  {
+    "id": "452",
+    "name": "第44回都賀地区連合納涼大会",
+    "location": {
+      "name": "美しの森公園",
+      "state": "千葉県",
+      "stateCode": "12",
+      "city": "千葉市",
+      "cityCode": "1212",
+      "address": "若葉区都賀2-5",
+      "addressCode": "121040038",
+      "lat": "35.633996",
+      "long": "140.147403"
+    },
+    "features": {
+      "dancing": true,
+      "singing": false,
+      "drum": true,
+      "musicalPerformance": false,
+      "foodTruck": true,
+      "fireworks": false,
+      "mikoshi": false
+    },
+    "organizer": "都賀連合町会",
+    "periods": [
+      {
+        "start": "2018-07-26T09:00:00.000Z",
+        "end": "2018-07-26T12:00:00.000Z"
+      },
+      {
+        "start": "2018-07-27T09:00:00.000Z",
+        "end": "2018-07-27T12:00:00.000Z"
+      }
+    ],
+    "url": "https://tsugacyoukai.wixsite.com/mysite"
+  },
+  {
+    "id": "259",
+    "name": "第18回み春野ふるさと夏祭り",
+    "location": {
+      "name": "宇那谷み春野公園",
+      "state": "千葉県",
+      "stateCode": "12",
+      "city": "千葉市",
+      "cityCode": "1212",
+      "address": "花見川区み春野1丁目11",
+      "addressCode": "121020033",
+      "lat": "35.692313",
+      "long": "140.138213"
+    },
+    "features": {
+      "dancing": true,
+      "singing": true,
+      "drum": true,
+      "musicalPerformance": true,
+      "foodTruck": true,
+      "fireworks": true,
+      "mikoshi": false,
+      "specialProgram": [
+        "8月24日前夜祭の19:00から、子ども山車と子ども神輿でみ春野住宅地内を練り歩き",
+        "8月25日本祭の20:45頃から花火を打ち上げ"
+      ]
+    },
+    "organizer": "み春野自治会",
+    "periods": [
+      {
+        "start": "2018-08-25T06:30:00.000Z",
+        "end": "2018-08-25T12:00:00.000Z"
+      }
+    ]
+  },
+  {
+    "id": "1022",
+    "name": "寒川神社例大祭",
+    "location": {
+      "name": "寒川神社",
+      "state": "千葉県",
+      "stateCode": "12",
+      "city": "千葉市",
+      "cityCode": "1212",
+      "address": "中央区寒川町1丁目123",
+      "addressCode": "121010021",
+      "lat": "35.597307",
+      "long": "140.120246"
+    },
+    "features": {
+      "dancing": false,
+      "singing": false,
+      "drum": false,
+      "musicalPerformance": false,
+      "foodTruck": false,
+      "fireworks": false,
+      "mikoshi": false,
+      "specialProgram": [
+        "寒川御浜下り",
+        "18:00～19:00 海中渡御"
+      ]
+    },
+    "organizer": "寒川神社",
+    "periods": [
+      {
+        "start": "2018-08-19T22:00:00.000Z",
+        "end": "2018-08-20T12:00:00.000Z"
+      }
+    ]
+  },
+  {
+    "id": "665",
+    "name": "大盆踊り大会",
+    "location": {
+      "name": "幕張西第三公園横野球グランド",
+      "state": "千葉県",
+      "stateCode": "12",
+      "city": "千葉市",
+      "cityCode": "1212",
+      "address": "美浜区幕張西6-2-1他",
+      "addressCode": "121060012",
+      "lat": "35.662178",
+      "long": "140.032633"
+    },
+    "features": {
+      "dancing": true,
+      "singing": false,
+      "drum": false,
+      "musicalPerformance": false,
+      "foodTruck": true,
+      "fireworks": false,
+      "mikoshi": false
+    },
+    "organizer": "第30地区町内自治会連絡協議会",
+    "periods": [
+      {
+        "start": "2018-07-20T09:30:00.000Z",
+        "end": "2018-07-20T12:00:00.000Z"
+      },
+      {
+        "start": "2018-07-21T09:00:00.000Z",
+        "end": "2018-07-21T12:00:00.000Z"
+      }
+    ]
+  },
+  {
+    "id": "666",
+    "name": "磯辺幼稚園夏祭り",
+    "location": {
+      "name": "磯辺幼稚園",
+      "state": "千葉県",
+      "stateCode": "12",
+      "city": "千葉市",
+      "cityCode": "1212",
+      "address": "美浜区磯辺7-16-1",
+      "addressCode": "121060001",
+      "lat": "35.636119",
+      "long": "140.052949"
+    },
+    "features": {
+      "dancing": true,
+      "singing": false,
+      "drum": true,
+      "musicalPerformance": false,
+      "foodTruck": true,
+      "fireworks": false,
+      "mikoshi": false
+    },
+    "organizer": "磯辺幼稚園",
+    "periods": [
+      {
+        "start": "2018-08-25T07:00:00.000Z",
+        "end": "2018-08-25T09:00:00.000Z"
+      }
+    ]
   }
 ]
