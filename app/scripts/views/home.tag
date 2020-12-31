@@ -17,6 +17,15 @@
   </div>
 
   <article class="content">
+    <section class="notice">
+      <h1>サービス終了のお知らせ</h1>
+      <p>
+        2015年7月より運営してまいりました「お祭りデータセンター」ですが、サービスの利用状況を鑑みて、2021年1月31日(日) をもちまして、サービスを終了させていただくこととなりました。
+      </p>
+      <p>
+        いままで「お祭りデータセンター」をご利用いただき、誠にありがとうございます。引き続き、NPO法人Code for Chiba のサービスを利用いただけますことを心よりお待ち申し上げます。
+      </p>
+    </section>
     <section class="homesearch">
       <div class="homesearch-list">
         <a href="javascript:void(0)" onclick={doClickCitySearchPanel}>
@@ -234,6 +243,21 @@
   </script>
 
   <style scoped>
+    .notice {
+      margin: 15px;
+    }
+
+    .notice h1 {
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+      padding-bottom: 24px;
+    }
+
+    .notice p {
+      font-size: 16px;
+    }
+
     .homesearch {
       background: #f5ac42;
       margin-bottom: 30px;
